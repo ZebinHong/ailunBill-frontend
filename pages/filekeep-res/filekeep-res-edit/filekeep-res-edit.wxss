@@ -1,0 +1,32 @@
+.button-box {
+  display: flex;
+  flex-direction: row;
+}
+
+picker {
+  width: 100%;
+}
+
+.type-radio {
+  margin-bottom: 30rpx;
+  padding: 26rpx 0;
+}
+
+
+.tap-item {
+  float: left;
+  padding: 15rpx 35rpx;
+  text-align: center;
+}
+.tap-item view{
+  font-size:50rpx;
+  color: rgb(167, 166, 166);
+}
+
+.active {
+  font-weight: bolder;
+}
+
+.active view{
+  color: #07c160;
+}

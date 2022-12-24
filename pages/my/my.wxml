@@ -1,0 +1,75 @@
+<view class="container">
+  <image class="tn_bg" mode="aspectFill" src="../../image/bg2-1.png"></image>
+  <view class="user_info_wrap">
+    <view class="user_image_wrap" wx:if="{{!showLogin}}">
+      <view class="user_info">
+        <view class="user_icon">
+          <image src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        <view class="user_name">
+          <view style="font-family:'diary'">{{userInfo.name}}</view>
+          <view style="font-family:'diary'">欢迎来到艾伦记账！</view>
+        </view>
+        <view class="logout" bindtap="logoutTap">
+          退出登录
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="login_btn" bindtap="getUserProfile">
+      <view class="user_login_wrap">
+        登录
+      </view>
+    </view>
+
+  </view>
+  <view class="user_content">
+    <view class="user_main">
+      <view class="orders_wrap">
+        <navigator class="orders_item border_line" url="/pages/personmsg/personmsg?userId={{userInfo.id}}">
+          <image src="../../image/my/owner.png"></image>
+          <view class="text">个人信息</view>
+        </navigator>
+        <navigator class="orders_item border_line" url="/pages/bill/bill" open-type="switchTab">
+          <image src="../../image/my/keep.png"></image>
+          <view class="text">账单列表</view>
+        </navigator>
+        <navigator class="orders_item border_line" url="/pages/census/census" open-type="switchTab">
+          <image src="../../image/my/tongji.png"></image>
+          <view class="text">账单统计</view>
+        </navigator>
+        <!-- <navigator class="orders_item border_line" url="/pages/tag/tag" open-type="navigate">
+          <image src="../../image/my/dingdan.png"></image>
+          <view class="text">标签管理</view>
+        </navigator> -->
+        <view class="orders_item border_line" bindtap="noDevTap">
+          <image src="../../image/my/dingdan.png"></image>
+          <view class="text">标签管理</view>
+        </view>
+      </view>
+      <view class="orders_wrap">
+        <navigator class="orders_item border_line" url="/pages/feedback/feedback">
+          <image src="../../image/my/kefu.png"></image>
+          <view class="text">
+            意见反馈
+          </view>
+
+        </navigator>
+        <navigator class="orders_item border_line" url="/pages/about/about">
+          <image src="../../image/my/about.png"></image>
+          <view class="text">关于我们</view>
+
+        </navigator>
+        <navigator class="orders_item" url="/pages/link/link">
+          <image src="../../image/my/fenxiang.png"></image>
+          <view class="text">联系我们</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view>
+    <tabbar tabbar="{{tabbar}}"></tabbar>
+  </view>
+  <view class="clear" style="clear: both;">
+  </view>
+</view>

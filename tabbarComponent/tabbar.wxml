@@ -1,0 +1,35 @@
+<view class="tabbar_box {{isIphoneX?'iphoneX-height':''}}" style="background-color:{{tabbar.backgroundColor}};">
+  <block wx:for="{{tabbar.list}}" wx:key="{{item.pagePath}}" >
+    <view wx:if="{{item.isSpecial == true}}" class="tabbar_nav" style="color:{{tabbar.selectedColor}}" bindtap="specialTap">
+      <view class='special-wrapper'>
+        <image class="tabbar_icon" src="{{item.iconPath}}"></image>
+      </view>
+      <image class='special-text-wrapper'></image>
+      <text>{{item.text}}</text>
+    </view>
+
+    <navigator wx:else class="tabbar_nav" hover-class="none" url="{{item.pagePath}}" style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" open-type="switchTab">
+      <image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>
+      <text>{{item.text}}</text>
+    </navigator>
+  </block>
+</view>
+
+<mp-half-screen-dialog title="请选择记账方式" bindbuttontap="buttontap" show="{{show}}" maskClosable="{{false}}" buttons="{{buttons}}">
+  <view slot="desc">
+    <view class="down-box" style="height: 100px;">
+        <view class="down-item" catchtap="onWordTap">
+          <image src="../image/keep/word.png" mode=""/>
+          <text>文字</text>
+        </view>
+        <view class="down-item" catchtap="onVoiceTap">
+          <image src="../image/keep/voice.png" mode=""/>
+          <text>语音</text>
+        </view>
+        <view class="down-item" catchtap="onExcelTap">
+          <image src="../image/keep/excel.png" mode=""/>
+          <text>Excel文件</text>
+        </view>
+    </view>
+  </view>
+</mp-half-screen-dialog>

@@ -1,0 +1,57 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="page-section">
+      <view class="weui-cells__title">金额(元)</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="money" value="{{money}}" placeholder="{{money == 0?'金额': money}}" focus="true" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">备注</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="details" value="{{details}}" placeholder="{{details==null||details==''?'备注(非必填)': details}}" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">日期</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <picker name="date" mode="date" value="{{date}}" bindchange="bindDataChange" style="width: 100%;">
+            {{date==''||date==null ? '今天':date}}
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">类型</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <radio-group name="type">
+            <radio value="1" checked="{{type == 1||type == null?true:false}}" style="margin-right: 30rpx;">支出
+            </radio>
+            <radio value="0" checked="{{type == 0?true:false}}">收入</radio>
+          </radio-group>
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">分类</view>
+      <view class="weui-cells weui-cells_after-title">
+        <block class="tap" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx">
+          <view class="tap-item {{item.id == activeTagId?'active':''}}" catchtap="onTagTap" data-id="{{item.id}}">
+            <view class="iconfont {{item.iconClass}}"></view>
+            <text>{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="button-box">
+      <button bindtap="deleteTap" style="color: white; background-color: red;margin-top: 50rpx;width: 40%;">删除</button>
+      <button form-type="submit" style="color: white; background-color: #07c160;margin-top: 50rpx;width: 40%;">修改</button>
+    </view>
+  </form>
+</view>

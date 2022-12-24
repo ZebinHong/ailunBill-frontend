@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "tabbar": "../../tabbarComponent/tabbar"
+  },
+  "navigationBarTitleText": "统计"
+}

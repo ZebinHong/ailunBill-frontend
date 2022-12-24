@@ -1,0 +1,49 @@
+<view class="container">
+  <!-- <swiper indicator-dots="true" autoplay="true" interval="5000" circular="true" vertical="true">
+    <swiper-item>
+      <image src="/image/bill/post-1@text.jpg"></image>
+    </swiper-item>
+  </swiper> -->
+  <view class="month-box">
+    <text class="month-title">欢迎来到艾伦记账小管家!\n我们旨在打造多种记账方式的简洁的记账小程序~</text>
+    <view class="month-bottom">
+      <view class="month-item" style="margin-right: 80rpx;">
+        <text>本月支出</text>
+        <view class="font">￥{{monthoutcome}}
+        </view>
+      </view>
+      <view class="month-item">
+        <text>本月收入</text>
+        <view class="font">￥{{monthincome}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="day-title" style="margin-left: 30rpx;">
+    <text style="margin-right: 50rpx;">今日支出¥{{dayoutcome}}</text>
+    <text>收入¥{{dayincome}}</text>
+  </view>
+  <view class="day-list">
+    <block wx:for="{{bills}}" wx:for-item="item" wx:for-index='idx'>
+      <navigator class="item-body" url="/pages/bill/billdetail/billdetail?id={{item.id}}" open-type="navigate">
+        <view class="left-box">
+          <view class="iconfont {{item.iconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
+          <view class="sub-item">
+            <text class="sub-type">{{item.tagDetail}}</text>
+            <view class="sub-bottom">
+              <text>{{item.recordTime}}</text>
+              <text>{{item.details == null?'':' '+item.details}}</text>
+            </view>
+          </view>
+        </view>
+        <text class="side-money">{{item.type == 0?'+':'-'}}{{item.money}}元</text>
+      </navigator>
+    </block>
+  </view>
+  <view style="text-align: center;margin-bottom: 50rpx;" class="bottom-word">
+    <text style="color: rgb(168, 168, 168);">———— 到底了 ————</text>
+  </view>
+  <view>
+    <tabbar tabbar="{{tabbar}}"></tabbar>
+  </view>
+</view>

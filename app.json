@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/index/index",
+    "pages/census/census",
+    "pages/my/my",
+    "pages/write/write",
+    "pages/bill/bill",
+    "pages/bill/billdetail/billdetail",
+    "pages/wordkeep/wordkeep",
+    "pages/voicekeep/vociekeep",
+    "pages/filekeep/filekeep",
+    "pages/filekeep-res/filekeep-res",
+    "pages/filekeep-res/filekeep-res-edit/filekeep-res-edit",
+    "pages/personmsg/personmsg",
+    "pages/outwebview/outwebview",
+    "pages/about/about",
+    "pages/link/link",
+    "pages/feedback/feedback"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#07c160"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#959595",
+    "selectedColor": "#07c160",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "tabbarComponent/icon/footer-i1.png",
+        "selectedIconPath": "tabbarComponent/icon/footer-i1h.png"
+      },
+      {
+        "pagePath": "pages/bill/bill",
+        "text": "账单",
+        "iconPath": "tabbarComponent/icon/footer-i2.png",
+        "selectedIconPath": "tabbarComponent/icon/footer-i2h.png"
+      },
+      {
+        "pagePath": "pages/census/census",
+        "text": "统计",
+        "iconPath": "tabbarComponent/icon/footer-i4.png",
+        "selectedIconPath": "tabbarComponent/icon/footer-i4h.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "tabbarComponent/icon/footer-i5.png",
+        "selectedIconPath": "tabbarComponent/icon/footer-i5h.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

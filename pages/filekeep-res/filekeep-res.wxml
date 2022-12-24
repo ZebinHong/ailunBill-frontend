@@ -1,0 +1,24 @@
+<view style="text-align: center; margin: 20rpx;">
+  <text style="font-weight: 900;font-family: '微软雅黑';">识别成功，结果如下：</text>
+</view>
+<view class="day-list">
+    <block wx:for="{{excelBills}}" wx:for-item="item" wx:for-index='idx'>
+      <navigator class="item-body" url="/pages/filekeep-res/filekeep-res-edit/filekeep-res-edit?id={{item.id}}" open-type="navigate">
+        <view class="left-box">
+          <view class="iconfont {{item.tagIconClass == null?'icon-excel': item.tagIconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
+          <view class="sub-item">
+            <text class="sub-type">{{item.tagDetail == undefined ? 'Excel': item.tagDetail}}</text>
+            <view class="sub-bottom">
+              <text>{{item.recordTime}}</text>
+              <text>{{item.details == null?'':' '+item.details}}</text>
+            </view>
+          </view>
+        </view>
+        <text class="side-money">{{item.type == 0?'+':'-'}}{{item.money}}元</text>
+      </navigator>
+    </block>
+    <view style="display: flex;flex-direction: row; padding-bottom: 40rpx; padding-top: 20rpx;">
+      <button style="color: #fff; background-color: red; width: 40%;" bindtap="cancelTap">删除</button>
+      <button style="color: #fff; background-color: #07c160; width: 40%;" bindtap="keepTap">导入</button>
+    </view>
+  </view>

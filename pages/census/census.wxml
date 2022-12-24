@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="top-box">
+    <view class="right-box">
+      <text class="outcome {{type == 1 ? 'active':''}}" bindtap="outcomeTap">支出</text>
+      <text class="income {{type == 0 ? 'active':''}}" bindtap="incomeTap">收入</text>
+    </view>
+    <picker mode="date" fields="month" bindchange="bindDateChange">
+      日期：{{year}}年{{month}}月
+    </picker>
+    <view class="sum-font">
+      <text>总{{type == 1 ? '支出': '收入'}}</text>
+      <view style="font-size: 50rpx;">
+        ￥{{sum}}
+      </view>
+    </view>
+  </view>
+  <view class="wrap">
+    <ec-canvas id="mychart-dom-line2" canvas-id="mychart-line2" ec="{{ ec }}" ></ec-canvas>
+  </view>
+  <view class="wrap" >
+    <ec-canvas id="mychart-dom-line"  canvas-id="mychart-line" ec="{{ ec }}" ></ec-canvas>    
+  </view>
+  <view>
+    <tabbar tabbar="{{tabbar}}"></tabbar>
+  </view>
+</view>

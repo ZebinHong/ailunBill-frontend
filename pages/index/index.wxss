@@ -1,0 +1,83 @@
+@import '../../style/weui.wxss';
+@import '../../style/iconfont.wxss';
+swiper{
+  width: 100%;
+  height: 600rpx;
+}
+image{
+  width: 100%;
+  height: 600rpx;
+}
+.down{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.down-item{
+  padding: 20rpx;
+}
+.month-box{
+  height: 235rpx;
+  padding: 20rpx 20rpx;
+  margin-bottom: 10rpx;
+  background-color: #07c160;
+  /* border-radius: 10rpx; */
+  color: aliceblue;
+  /* text-align: center; */
+}
+.month-box .font{
+  font-size: 45rpx;
+  /* color: rgb(161, 87, 1); */
+}
+.month-bottom{
+  display:flex;
+  flex-direction: row;
+}
+.month-bottom .month-item{
+  padding: 5rpx 0;
+}
+/* .day-list{
+  margin: 0 30rpx;
+} */
+
+
+.item-title{
+  padding: 30rpx 20rpx;
+}
+.item-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+}
+.sub-item{
+  display: flex;
+  flex-direction: column;
+}
+.sub-item .sub-type{
+  color: #000;
+  font-weight: bold;
+}
+.sub-bottom text{
+  font-weight: 100;
+  font-size: 25rpx;
+}
+.side-money{
+  color: #000;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+.top-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20rpx;
+}
+
+.left-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

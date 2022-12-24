@@ -1,0 +1,163 @@
+page {
+  height: 1450rpx;
+  padding-bottom: 100rpx;
+  box-sizing:border-box;
+}
+.tn_bg{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.user_info_wrap {
+  height: 300rpx;
+  overflow: hidden;
+  position: relative;
+}
+.user_info_wrap .user_image_wrap {
+  position: relative;
+  top: 85rpx;
+}
+.user_info_wrap .user_image_wrap .user_info image {
+  position: absolute;
+  top: 90%;
+  left: 5%;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 1rpx solid white;
+}
+.user_info_wrap .user_image_wrap .user_info .user_name {
+  position: absolute;
+  left: 30%;
+  top: 90%;
+  font-size: 40rpx;
+  color: black;
+}
+
+.logout{
+  position: absolute;
+  right: 10%;
+  margin-top: 33rpx;
+  color: #fff;
+  font-weight: 500;
+  font-size: 30rpx;
+  background-color: hsla(149, 93%, 39%, 0.459);
+  padding: 15rpx;
+  border-radius: 10rpx;
+}
+
+.user_info_wrap .user_image_wrap .user_info .user_name view{
+  font-size: 30rpx;
+  margin-top: 15rpx;
+}
+.user_info_wrap .user_login_wrap {
+  width: 150rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #07c160; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 50rpx;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border-radius: 50rpx;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.user_content {
+  position: relative;
+}
+.user_content .user_main {
+  position: absolute;
+  top: -40rpx;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.user_content .user_main .grade_wrap .his_name {
+  font-size: 35rpx;
+  color: black;
+  font-family: "diary";
+}
+.user_content .user_main .grade_wrap {
+  display: flex;
+  text-align: center;
+  padding: 10rpx 0;
+  border-radius: 8rpx;
+}
+.user_content .user_main .grade_wrap .grade_item {
+  flex: 1;
+  background-color: #fff;
+  padding: 0 5rpx;
+  border-radius: 8rpx;
+}
+.user_content .user_main .grade_wrap .grade_item1 {
+  border-right: 5rpx solid #0081ff;
+}
+.user_content .user_main .grade_wrap navigator {
+  flex: 1;
+}
+.user_content .user_main .grade_wrap navigator .his_number {
+  color: #0081ff;
+  font-size: 50rpx;
+  padding: 15rpx 0;
+}
+.user_content .user_main .grade_wrap navigator .his_name {
+  padding: 15rpx 0;
+}
+.user_content .user_main .orders_wrap {
+  background-color: white;
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
+  border-radius: 8rpx;
+  position: relative;
+}
+.user_content .user_main .orders_wrap image {
+  position: absolute;
+  width: 35rpx;
+  height: 35rpx;
+}
+.user_content .user_main .orders_wrap .navigator-hover:first-child{
+  
+  
+  border-top-left-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+}
+.user_content .user_main .orders_wrap .navigator-hover:last-child{
+  
+  
+  border-bottom-left-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
+}
+.user_content .user_main .orders_wrap .orders_item {
+  padding: 30rpx;
+  font-size: 35rpx;
+  color:black;
+  font-family: "diary";
+  position: relative;
+}
+.user_content .user_main .orders_wrap .orders_item .text {
+  padding: 11rpx;
+  margin-left: 40rpx;
+}
+.user_content .user_main .orders_wrap .orders_item image {
+  position: absolute;
+  top: 52rpx;
+}
+.orders_wrap .advice-btn{
+  background-color: #fff;
+  width: 100%;
+  color: #000;
+  font-weight: 500;
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+  "tabbar": "../../tabbarComponent/tabbar"
+  },
+  "navigationBarTitleText": "明细",
+  "onReachBottomDistance": 200
+}

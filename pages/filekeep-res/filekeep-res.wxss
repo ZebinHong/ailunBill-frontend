@@ -1,0 +1,41 @@
+
+.item-title{
+  padding: 30rpx 20rpx;
+}
+.item-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+}
+.sub-item{
+  display: flex;
+  flex-direction: column;
+}
+.sub-item .sub-type{
+  color: #000;
+  font-weight: bold;
+}
+.sub-bottom text{
+  font-weight: 100;
+  font-size: 25rpx;
+}
+.side-money{
+  color: #000;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+.top-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20rpx;
+}
+
+.left-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

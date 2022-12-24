@@ -1,0 +1,78 @@
+<view class="yuyinWrap">
+  <view class='yuyinBox'>
+    <view class="yuyinTitle">
+      <view>输入格式：xxx花费/收入xxx元</view>
+      <view>你可以试着这样说：</view>
+      <view>“天猫超市买菜花费20元</view>
+      <view>微信转账收入199.9元”</view>
+    </view>
+    <button class="yuyinBtn {{recordState == true ? 'yuyinBtnBg':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
+      按住说话
+      <!-- <text wx:if="{{recordState == false}}">按住 说话</text>
+      <text wx:else>松开 结束</text> -->
+    </button>
+  </view>
+  <!-- 开始语音 弹出语音图标表示正在录音 -->
+  <cover-view class="startYuyinImage" wx:if="{{recordState == true}}" >
+    <cover-image style="margin-top: 40rpx;" src="../../image/luyin-2.png"></cover-image>
+    <cover-view >开始语音</cover-view>
+  </cover-view>
+  <mp-half-screen-dialog title="识别结果" bindbuttontap="buttontap" show="{{show}}" maskClosable="{{false}}" buttons="{{buttons}}">
+    <view slot="desc">
+      <view class="container">
+        <scroll-view style="height: 300px;" scroll-y="true">
+          <view class="page-section">
+            <view class="weui-cells__title">金额(元)</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <input class="weui-input" name="money" value="{{obj.money}}" placeholder="金额" />
+              </view>
+            </view>
+          </view>
+          <view class="page-section">
+            <view class="weui-cells__title">备注</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <input class="weui-input" name="details" value="{{obj.details}}" placeholder="备注(非必填)" />
+              </view>
+            </view>
+          </view>
+          <view class="page-section">
+            <view class="weui-cells__title">日期</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <picker name="date" mode="date" value="{{obj.date}}" bindchange="bindDataChange">
+                  {{obj.date === '' ? '今天' : obj.date}}
+                </picker>
+              </view>
+            </view>
+          </view>
+          <view class="page-section">
+            <view class="weui-cells__title">类型</view>
+            <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell weui-cell_input">
+                <radio-group name="type">
+                  <radio value="1" checked="{{obj.type == 1 ? true : false}}" style="margin-right: 30rpx;">支出
+                  </radio>
+                  <radio value="0" checked="{{obj.type == 0 ? true : false}}">收入</radio>
+                </radio-group>
+              </view>
+            </view>
+          </view>
+          <view class="page-section">
+            <view class="weui-cells__title">分类</view>
+            <view class="weui-cells weui-cells_after-title">
+              <block class="tap" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx">
+                <view class="tap-item {{item.id == activeTagId?'active':''}}" catchtap="onTagTap" data-id="{{item.id}}">
+                  <view class="iconfont {{item.iconClass}}"></view>
+                  <text>{{item.name}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </mp-half-screen-dialog>
+
+</view>

@@ -1,0 +1,11 @@
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 8px;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}

@@ -1,0 +1,10 @@
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+@import './style/iconfont.wxss';
+
+text{
+  font-size:30rpx;
+  font-family:Microsoft YaHei;
+}
+.container{
+  padding-bottom: 100rpx;
+}

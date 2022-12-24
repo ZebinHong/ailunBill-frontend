@@ -1,0 +1,11 @@
+<view style="padding: 20rpx;margin-top: 50rpx;">
+<view>
+  联系方式:
+</view>
+  <view>
+    <text selectable="{{true}}">邮箱: 303170690@qq.com</text>
+  </view>
+  <view>
+    <text selectable="{{true}}">Github: https://github.com/CHANGEA-code</text>
+  </view>
+</view>

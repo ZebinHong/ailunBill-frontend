@@ -1,0 +1,7 @@
+<view class="container">
+    <image class="avatar" src="/image/avatar-1.png"></image>
+    <text class="motto">Hello, 欢迎来到艾伦记账~</text>
+    <view catchtap="onTapJump" class="journey-container">
+        <text class="journey">开启记账之旅</text>
+    </view>
+</view>

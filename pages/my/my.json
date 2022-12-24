@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tabbar": "../../tabbarComponent/tabbar"
+  },
+  "navigationBarTitleText": "个人中心"
+}

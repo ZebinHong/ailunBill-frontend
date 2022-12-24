@@ -1,0 +1,53 @@
+<view class="page-body">
+  <form catchsubmit="formSubmit">
+    <view class="page-section">
+      <view class="weui-cells__title">头像</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title">用户名</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input type="nickname" class="weui-input" name="name" value="{{userInfo.name}}" placeholder="空" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">邮箱</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="email" value="{{userInfo.email}}" placeholder="空" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells__title">性别</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <radio-group name="gender">
+            <radio value="true" checked="{{userInfo.gender == true ? true : false}}" style="margin-right: 30rpx;">男</radio>
+            <radio value="false" checked="{{userInfo.gender == false ? true : false}}">女</radio>
+          </radio-group>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="page-section">
+      <view class="weui-cells__title">余额</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="balance" value="{{userInfo.balance}}" placeholder="0" />
+        </view>
+      </view>
+    </view> -->
+    <view class="btn-area" style="margin-top: 30rpx;">
+      <button type="primary" formType="submit">保存</button>
+    </view>
+  </form>
+</view>

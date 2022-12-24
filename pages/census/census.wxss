@@ -1,0 +1,39 @@
+.wrap {
+  height: 550rpx;
+  margin: 60rpx 20rpx;
+  /* margin-top: 30px; */
+}
+
+.right-box {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+}
+picker{
+  color: #fff;
+  padding-top: 35rpx;
+}
+.right-box text{
+  font-size:28rpx;
+  color: #fff;
+  padding: 10rpx 25rpx;
+  border-radius: 6rpx;
+}
+.right-box .active{
+  font-weight: 900;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.sum-font{
+  height: 175rpx;
+  color: #fff;
+  margin-top: 35rpx;
+}
+.sum-font text{
+  font-size: 26rpx;
+  color: #fff;
+  /* color: rgb(184, 184, 184); */
+}
+.top-box{
+  background-color: #07c160;
+  padding-left: 20rpx;
+}
