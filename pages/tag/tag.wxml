@@ -1,0 +1,33 @@
+<view class="tag-box">
+  <view class="tag-item" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx" data-tag-id="{{item.id}}" data-user-id="{{item.userId}}" data-name="{{item.name}}" bindtap="toEdit">
+    <view class="iconfont {{item.iconClass}}" style="font-size:60rpx; color: #07c160; text-align: center; width: 96rpx;"></view>
+    <view style="text-align:center">{{item.name}}
+      <view wx:if="{{item.userId != 1}}" style="text-align:center;font-size: 22rpx;color: rgb(170, 170, 170);">
+        点击编辑
+      </view>
+    </view>
+  </view>
+  <view class="tag-item" catchtap="addTap">
+    <view class="iconfont icon-jia" style="font-size:60rpx; text-align: center; width: 96rpx; color:rgb(199, 199, 199);"></view>
+    <view style="text-align:center;color:rgb(199, 199, 199);">添加</view>
+  </view>
+</view>
+<mp-half-screen-dialog title="添加标签" bindbuttontap="buttontap" show="{{addShow}}" maskClosable="{{false}}" buttons="{{buttons}}">
+  <view slot="desc">
+    <view class="dialog-box">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" type="text" name="tagString" value="{{tagString}}" bindinput='getInputName' style="width:80%;" maxlength="4"></input>
+        <text style="margin-left:20rpx;">{{myTagNum}}/4</text>
+      </view>
+    </view>
+  </view>
+</mp-half-screen-dialog>
+<mp-half-screen-dialog title="编辑标签【{{editTagStr}}】" bindbuttontap="editButtontap" show="{{editShow}}" maskClosable="{{false}}" buttons="{{editButtons}}" >
+  <view slot="desc">
+    <view class="dialog-box">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" type="text" name="editTagStr" value="{{editTagStr}}" bindinput='getEditInputName' style="width:80%;" maxlength="4"></input>
+      </view>
+    </view>
+  </view>
+</mp-half-screen-dialog>

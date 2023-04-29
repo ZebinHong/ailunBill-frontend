@@ -27,21 +27,25 @@ Page({
    */
   onLoad(options) {
     var userId = wx.getStorageSync('userId');
-    this.setData({userId});
-    getTagList(userId).then(res => {
+    this.setData({
+      userId,
+      billId: options.id
+    });
+  },
+  onShow() {
+    getTagList(this.data.userId).then(res => {
       if (res.data.code == 200) {
         this.setData({
           tags: res.data.data
         });
       }
-    })
-    getBillDetail(options.id).then(res => {
+    });
+    getBillDetail(this.data.billId).then(res => {
       if (res.data.code === 200) {
         var bill = res.data.data;
         let idx = bill.recordTime.indexOf(" ");
         bill.recordTime = bill.recordTime.substring(0, idx);
         this.setData({
-          billId: options.id,
           money: bill.money,
           activeTagId: bill.tagId,
           type: bill.type,
@@ -110,16 +114,16 @@ Page({
       if (res.data.code === 200) {
         //修改存储实体
         var excel = wx.getStorageSync('excelBills');
-        for (let i = 0; i < excel.length; i ++ ){
-          if (excel[i].id == this.data.billId){
+        for (let i = 0; i < excel.length; i++) {
+          if (excel[i].id == this.data.billId) {
             excel[i].money = billInfo.money;
             excel[i].recordTime = billInfo.recordTime;
             excel[i].tagId = billInfo.tagId;
             excel[i].type = billInfo.type;
             excel[i].details = billInfo.details
             var tags = this.data.tags;
-            for (let j = 0; j < tags.length; j ++ ){
-              if (tags[j].id == billInfo.tagId){
+            for (let j = 0; j < tags.length; j++) {
+              if (tags[j].id == billInfo.tagId) {
                 excel[i].tagDetail = tags[j].name;
                 excel[i].tagIconClass = tags[j].iconClass;
                 break;
@@ -159,8 +163,8 @@ Page({
       if (res.data.code == 200) {
         //修改存储实体
         var excel = wx.getStorageSync('excelBills');
-        for (let i = 0; i < excel.length; i ++ ){
-          if (excel[i].id == this.data.billId){
+        for (let i = 0; i < excel.length; i++) {
+          if (excel[i].id == this.data.billId) {
             excel.splice(i, 1);
             wx.setStorageSync('excelBills', excel)
             break;

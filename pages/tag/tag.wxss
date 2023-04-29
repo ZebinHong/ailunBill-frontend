@@ -1,0 +1,8 @@
+.tag-item {
+  float: left;
+  padding: 20rpx 10rpx;
+}
+.dialog-box{
+  margin-top: 50rpx;
+  background-color: rgb(243, 241, 241);
+}

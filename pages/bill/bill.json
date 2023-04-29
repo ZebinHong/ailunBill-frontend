@@ -3,5 +3,6 @@
   "tabbar": "../../tabbarComponent/tabbar"
   },
   "navigationBarTitleText": "明细",
-  "onReachBottomDistance": 200
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true
 }

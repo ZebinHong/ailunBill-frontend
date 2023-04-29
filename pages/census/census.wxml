@@ -3,12 +3,14 @@
     <view class="right-box">
       <text class="outcome {{type == 1 ? 'active':''}}" bindtap="outcomeTap">支出</text>
       <text class="income {{type == 0 ? 'active':''}}" bindtap="incomeTap">收入</text>
+      <text class="income {{type == 2 ? 'active':''}}" bindtap="subTap">结余</text>
     </view>
     <picker mode="date" fields="month" bindchange="bindDateChange">
       日期：{{year}}年{{month}}月
     </picker>
     <view class="sum-font">
-      <text>总{{type == 1 ? '支出': '收入'}}</text>
+      <text wx:if="{{type == 0 || type == 1}}">总{{type == 1 ? '支出': '收入'}}</text>
+      <text wx:else>总收入 - 总支出</text>
       <view style="font-size: 50rpx;">
         ￥{{sum}}
       </view>

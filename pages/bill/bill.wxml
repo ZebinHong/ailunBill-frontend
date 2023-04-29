@@ -1,57 +1,63 @@
 <view class="container">
   <view class="top-container">
-  <picker mode="date" value="{{date}}" fields="month" bindchange="bindDateChange">
-    {{year}}年{{month}}月
-  </picker>
-  <view class="tag-box" bindtap="openChooseClass">
-    分类：{{tagName}}
-    <text class="{{tagClass}}" style="color: #07c160;"></text>
+    <picker mode="date" value="{{date}}" fields="month" bindchange="bindDateChange">
+      {{year}}年{{month}}月
+    </picker>
+    <view class="tag-box" bindtap="openChooseClass">
+      分类：{{tagName}}
+      <text class="{{tagClass}}" style="color: #07c160;"></text>
+    </view>
   </view>
-</view>
 
-<!--分类选择器-->
-<view class="page">
-  <view wx:if="{{dialog}}" class="weui-skin_android fadeIn" bindtap="closeChooseClass">
-    <view class="weui-mask"></view>
-    <view class="weui-actionsheet">
-      <view class="weui-actionsheet__menu">
-        <view class="weui-grids">
-          <a class="weui-grid" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx" bindtap="chooseClass" data-tag-id="{{item.id}}">
-            <view class="weui-grid__icon">
-              <view class="iconfont {{item.iconClass}}" style="font-size:50rpx; color: #07c160;"></view>
-            </view>
-            <view class="weui-grid__label">{{item.name}}</view>
-          </a>
+  <!--分类选择器-->
+  <view class="page">
+    <view wx:if="{{dialog}}" class="weui-skin_android fadeIn" bindtap="closeChooseClass">
+      <view class="weui-mask"></view>
+      <view class="weui-actionsheet">
+        <view class="weui-actionsheet__menu">
+          <view class="weui-grids">
+            <a class="weui-grid" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx" bindtap="chooseClass" data-tag-id="{{item.id}}">
+              <view class="weui-grid__icon">
+                <view class="iconfont {{item.iconClass}}" style="font-size:50rpx; color: #07c160;"></view>
+              </view>
+              <view class="weui-grid__label">{{item.name}}</view>
+            </a>
+          </view>
         </view>
       </view>
     </view>
   </view>
-</view>
 
-<!--账单list-->
-<view class="list-container">
-  <view class="list-item">
-    <block wx:for="{{bills}}" wx:for-item="item" wx:for-index='idx'>
-      <navigator class="item-body" url="/pages/bill/billdetail/billdetail?id={{item.id}}" open-type="navigate">
-        <view class="left-box">
-          <view class="iconfont {{item.iconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
-          <view class="sub-item">
-            <text class="sub-type">{{item.tagDetail}}</text>
-            <view class="sub-bottom">
-              <text>{{item.recordTime}}</text>
-              <text>{{item.details == null?'':' '+item.details}}</text>
+  <!--账单list-->
+  <view class="list-container">
+    <view class="list-item">
+      <block wx:for="{{bills}}" wx:for-item="item" wx:for-index='idx'>
+        <navigator class="item-body" url="/pages/bill/billdetail/billdetail?id={{item.id}}" open-type="navigate">
+          <view class="left-box">
+            <view class="iconfont {{item.iconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
+            <view class="sub-item">
+              <text class="sub-type">{{item.tagDetail}}</text>
+              <view class="sub-bottom">
+                <text>{{item.showTime}}</text>
+                <block wx:if="{{item.details != null && item.details != ''}}">
+                  <text style="color: rgb(182, 182, 182);"> | </text>
+                  <text>{{item.details}}</text>
+                </block>
+              </view>
             </view>
           </view>
-        </view>
-        <text class="side-money">{{item.type == 0?'+':'-'}}{{item.money}}元</text>
-      </navigator>
-    </block>
+          <text class="side-money">{{item.type == 0?'+':'-'}}{{item.money}}元</text>
+        </navigator>
+      </block>
+    </view>
   </view>
-</view>
-<view style="text-align: center;" class="bottom-word">
-  <text style="color: rgb(168, 168, 168);">———— 到底了 ————</text>
-</view>
-<view>
-  <tabbar tabbar="{{tabbar}}"></tabbar>
-</view>
+  <view wx:if="{{isBottom}}" style="text-align: center;" class="bottom-word">
+    <text style="color: rgb(168, 168, 168);">———— 到底了 ————</text>
+  </view>
+  <view wx:else style="text-align: center;" class="bottom-word">
+    <text style="color: rgb(168, 168, 168);">———— 下滑查看更多 ————</text>
+  </view>
+  <view>
+    <tabbar tabbar="{{tabbar}}"></tabbar>
+  </view>
 </view>

@@ -12,11 +12,14 @@
     "pages/filekeep/filekeep",
     "pages/filekeep-res/filekeep-res",
     "pages/filekeep-res/filekeep-res-edit/filekeep-res-edit",
+    "pages/alipayFilekeep/alipayFilekeep",
     "pages/personmsg/personmsg",
     "pages/outwebview/outwebview",
+    "pages/outwebview2/outwebview2",
     "pages/about/about",
     "pages/link/link",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/tag/tag"
   ],
   "window":{
     "navigationBarBackgroundColor": "#07c160"

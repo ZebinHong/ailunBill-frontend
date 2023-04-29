@@ -1,5 +1,9 @@
-import {getTagList} from '../../service/tagApi.js'
-import {removeBillBatch} from '../../service/billApi.js'
+import {
+  getTagList
+} from '../../service/tagApi.js'
+import {
+  removeBillBatch
+} from '../../service/billApi.js'
 Page({
 
   /**
@@ -7,36 +11,24 @@ Page({
    */
   data: {
     excelBills: [],
-    tags:[]
+    tags: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    var excelBills = wx.getStorageSync('excelBills')
-    this.setData({excelBills})
-
-    var userId = wx.getStorageSync('userId');
-    getTagList(userId).then(res => {
-      if (res.data.code == 200) {
-        console.log(res)
-        this.setData({
-          tags: res.data.data
-        });
-      }
-    })
+  onLoad() {
   },
-  cancelTap(){
+  cancelTap() {
     //批量删除识别结果
     var excel = wx.getStorageSync('excelBills');
     var ids = '';
-    for (let i = 0; i < excel.length; i ++ ){
+    for (let i = 0; i < excel.length; i++) {
       ids += excel[i].id + " ";
     }
     removeBillBatch(ids).then(res => {
       console.log(res);
-      if (res.data.code == 200){
+      if (res.data.code == 200) {
         wx.navigateBack({
           complete() {
             wx.showToast({
@@ -46,7 +38,7 @@ Page({
             })
           }
         });
-      }else {
+      } else {
         wx.navigateBack({
           complete() {
             wx.showToast({
@@ -59,7 +51,7 @@ Page({
       }
     })
   },
-  keepTap(){
+  keepTap() {
     wx.navigateBack({
       complete() {
         wx.showToast({
@@ -75,15 +67,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    var excelBills = wx.getStorageSync('excelBills')
-    this.setData({excelBills})
+    var userId = wx.getStorageSync('userId');
+    var excelBills = wx.getStorageSync('excelBills');
+    getTagList(userId).then(res => {
+      if (res.data.code == 200) {
+        this.setData({
+          tags: res.data.data
+        });
+        var bills = excelBills, tags = res.data.data;
+        for (var i = 0; i < bills.length; i++) {
+          for (var j = 0; j < tags.length; j++) {
+            if (bills[i].tagId == tags[j].id) {
+              bills[i].iconClass = tags[j].iconClass;
+              break;
+            }
+          }
+        }
+        this.setData({
+          excelBills: bills
+        });
+      }
+    });
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    if (this.data.excelBills.length != 0){
+    if (this.data.excelBills.length != 0) {
       wx.removeStorageSync('excelBills')
     }
   },

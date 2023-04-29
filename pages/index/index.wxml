@@ -31,8 +31,11 @@
           <view class="sub-item">
             <text class="sub-type">{{item.tagDetail}}</text>
             <view class="sub-bottom">
-              <text>{{item.recordTime}}</text>
-              <text>{{item.details == null?'':' '+item.details}}</text>
+              <text>{{item.showTime}}</text>
+              <block wx:if="{{item.details != null && item.details != ''}}">
+                <text style="color: rgb(182, 182, 182);"> | </text>
+                <text>{{item.details}}</text>
+              </block>
             </view>
           </view>
         </view>
@@ -40,8 +43,11 @@
       </navigator>
     </block>
   </view>
-  <view style="text-align: center;margin-bottom: 50rpx;" class="bottom-word">
+  <view wx:if="{{isBottom}}" style="text-align: center; margin-bottom: 50rpx;" class="bottom-word">
     <text style="color: rgb(168, 168, 168);">———— 到底了 ————</text>
+  </view>
+  <view wx:else style="text-align: center;margin-bottom: 50rpx;" class="bottom-word">
+    <text style="color: rgb(168, 168, 168);">———— 下滑查看更多 ————</text>
   </view>
   <view>
     <tabbar tabbar="{{tabbar}}"></tabbar>

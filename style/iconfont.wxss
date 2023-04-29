@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3797220 */
-  src: url('//at.alicdn.com/t/c/font_3797220_ce5x5ismiod.woff2?t=1671343583346') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3797220_ce5x5ismiod.woff?t=1671343583346') format('woff'),
-       url('//at.alicdn.com/t/c/font_3797220_ce5x5ismiod.ttf?t=1671343583346') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3797220_ewnzdad90if.woff2?t=1680159825322') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3797220_ewnzdad90if.woff?t=1680159825322') format('woff'),
+       url('//at.alicdn.com/t/c/font_3797220_ewnzdad90if.ttf?t=1680159825322') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-jia:before {
+  content: "\e601";
+}
+
+.icon-tags:before {
+  content: "\e887";
+}
+
+.icon-canyin:before {
+  content: "\e613";
+}
+
+.icon-weixin:before {
+  content: "\e610";
+}
+
+.icon-alipay:before {
+  content: "\e618";
+}
+
 .icon-qita:before {
   content: "\e60b";
 }
@@ -21,24 +41,12 @@
   content: "\e616";
 }
 
-.icon-shengboyuyinxiaoxi:before {
-  content: "\e8c4";
-}
-
-.icon-excel:before {
-  content: "\e605";
-}
-
 .icon-quanbu:before {
   content: "\e639";
 }
 
 .icon-gouwucheman:before {
   content: "\e600";
-}
-
-.icon-canyin:before {
-  content: "\e6e8";
 }
 
 .icon-jiaotong:before {
@@ -59,8 +67,4 @@
 
 .icon-fushi:before {
   content: "\e7ec";
-}
-
-.icon-canyin-copy:before {
-  content: "\e8c5";
 }

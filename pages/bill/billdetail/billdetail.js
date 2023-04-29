@@ -26,8 +26,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({
+      billId: options.id
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
     var userId = wx.getStorageSync('userId');
-    this.setData({userId});
+    this.setData({
+      userId
+    });
     getTagList(userId).then(res => {
       if (res.data.code == 200) {
         this.setData({
@@ -35,13 +53,12 @@ Page({
         });
       }
     })
-    getBillDetail(options.id).then(res => {
+    getBillDetail(this.data.billId).then(res => {
       if (res.data.code === 200) {
         var bill = res.data.data;
         let idx = bill.recordTime.indexOf(" ");
         bill.recordTime = bill.recordTime.substring(0, idx);
         this.setData({
-          billId: options.id,
           money: bill.money,
           activeTagId: bill.tagId,
           type: bill.type,
@@ -57,20 +74,6 @@ Page({
         })
       }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
   },
 
   /**

@@ -111,6 +111,20 @@ Component({
         }
       })
     },
+    onAlipayExcelTap: function(){
+      this.setData({
+        show: false
+      })
+      wx.navigateTo({
+        url: '../alipayFilekeep/alipayFilekeep',
+        fail: function () {
+          console.log("jump failed")
+          this.setData({
+            show: true
+          })
+        }
+      })
+    },
     buttontap(e) {
       if (e.detail.index === 0) {
         this.setData({

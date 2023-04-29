@@ -5,9 +5,9 @@
     <block wx:for="{{excelBills}}" wx:for-item="item" wx:for-index='idx'>
       <navigator class="item-body" url="/pages/filekeep-res/filekeep-res-edit/filekeep-res-edit?id={{item.id}}" open-type="navigate">
         <view class="left-box">
-          <view class="iconfont {{item.tagIconClass == null?'icon-excel': item.tagIconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
+          <view class="iconfont {{item.iconClass}}" style="font-size:70rpx; margin-right: 20rpx; color: #07c160;"></view>
           <view class="sub-item">
-            <text class="sub-type">{{item.tagDetail == undefined ? 'Excel': item.tagDetail}}</text>
+            <text class="sub-type">{{item.tagDetail}}</text>
             <view class="sub-bottom">
               <text>{{item.recordTime}}</text>
               <text>{{item.details == null?'':' '+item.details}}</text>

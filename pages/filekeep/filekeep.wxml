@@ -1,7 +1,8 @@
 <button bindtap="uploadAction" style="color: white; background-color: #07c160; margin-top: 350rpx;">
   导入excel文件
 </button>
-<view class="title-box" style="text-align: center; margin-top: 20rpx;">
+<view class="title-box" style=" margin: 30rpx;">
   <text>目前仅支持微信账单的.xls/.xlsx文件，</text>
-  <text style="color: cornflowerblue;" bindtap="toWanye">获取微信账单方式</text>
+  <text style="color: cornflowerblue;" bindtap="toWanye">获取微信账单方式。</text>
+  <text>若excel文件格式不是xls/xlsx，请点击excel文件，找到“文件另存为”，保存时格式选择xls/xlsx即可。</text>
 </view>

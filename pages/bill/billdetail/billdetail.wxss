@@ -22,9 +22,12 @@ picker {
   font-size:50rpx;
   color: rgb(167, 166, 166);
 }
-
-.active {
-  font-weight: bolder;
+.tap-item text{
+  font-size: 26rpx;
+  color: rgb(167, 166, 166);
+}
+.active text {
+  color: #07c160;
 }
 
 .active view{

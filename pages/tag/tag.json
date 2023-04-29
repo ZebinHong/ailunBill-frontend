@@ -2,5 +2,5 @@
   "usingComponents": {
     "mp-half-screen-dialog": "../../miniprogram_npm/weui-miniprogram/half-screen-dialog/half-screen-dialog"
   },
-  "navigationBarTitleText": "语音识别"
+  "navigationBarTitleText": "标签管理"
 }

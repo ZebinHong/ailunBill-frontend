@@ -19,7 +19,6 @@ Page({
    */
   data: {
     userId: 0,
-    //语音
     recordState: false, //录音状态
     show: false,
     activeTagId: 10,
@@ -48,7 +47,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     //识别语音
     this.initRecord();
     var userId = wx.getStorageSync('userId');
@@ -65,17 +64,14 @@ Page({
   initRecord: function () {
     //识别结束事件
     manager.onStop(res => {
-      console.log(res);
-      log.info("语音 res：" + JSON.stringify(res));
       var that = this;
+      wx.showNavigationBarLoading();
       wx.uploadFile({
         url: BASEURL + "/money/voice/translate",
         filePath: res.tempFilePath,
         name: 'file',
         success: function (res) {
           var obj = JSON.parse(res.data);
-          console.log(obj);
-          log.info("识别结果：res" + JSON.stringify(obj));
           if (obj.code === 200) {
             var type = 0;
             obj = obj.data;
@@ -85,7 +81,6 @@ Page({
             }
             obj.type = type;
             obj.date = '';
-            console.log(type);
             that.setData({
               obj: obj,
               show: true
@@ -97,32 +92,36 @@ Page({
               duration: 1500
             })
           }
+          wx.hideNavigationBarLoading()
         },
         fail: function () {
-          console.log("语音识别失败");
+          wx.hideNavigationBarLoading()
+          wx.showToast({
+            title: '语音识别失败',
+            icon: 'error',
+            duration: 1000
+          })
         }
       })
     })
   },
   //语音  --按住说话
   touchStart: function (e) {
-    log.info("录制开始");
     this.setData({
       recordState: true //录音状态
     })
-    // 语音开始识别
+    // 语音开始识别，并设置参数
     manager.start({
       duration: 15000, //最长录制时间
       sampleRate: 16000,
       numberOfChannels: 1,
       encodeBitRate: 64000,
-      format: 'PCM',
+      format: 'PCM', //文件格式
       frameSize: 50
     })
   },
   //语音  --松开结束
   touchEnd: function (e) {
-    log.info("录制结束");
     this.setData({
       recordState: false
     })
@@ -130,7 +129,6 @@ Page({
     manager.stop();
   },
   buttontap(e) {
-    console.log(e.detail)
     if (e.detail.index === 0) {
       this.setData({
         money: 0,
@@ -159,7 +157,6 @@ Page({
         recordTime: recordTime
       }
       addBill(billInfo).then(res => {
-        console.log(res);
         if (res.data.code === 200) {
           this.setData({
             show: false
@@ -205,5 +202,5 @@ Page({
         })
       }
     }
-  },
+  }
 })

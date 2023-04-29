@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tags: [
-    ],
+    tags: [],
     activeTagId: 1,
     date: '',
     money: '',
@@ -20,13 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userId = wx.getStorageSync('userId');
-    this.setData({userId})
-    getTagList(userId).then(res => {
-      if (res.data.code == 200){
-        this.setData({tags: res.data.data});
-      }
-    })
   },
 
   /**
@@ -39,7 +31,15 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    var userId = wx.getStorageSync('userId');
+    this.setData({userId})
+    getTagList(userId).then(res => {
+      if (res.data.code == 200){
+        this.setData({tags: res.data.data});
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -94,7 +94,6 @@ Page({
   formSubmit: function (event) {
     var that = this;
     var billInfo = event.detail.value
-
     //校验
     if (billInfo.money == '' || billInfo.money == undefined) {
       wx.showToast({
@@ -104,7 +103,6 @@ Page({
       })
       return false;
     }else if (!(/^(-?\d+)(\.\d+)?$/.test(billInfo.money))) {
-
       wx.showToast({
         title: '金额格式错误',
         icon: 'error',
@@ -112,16 +110,13 @@ Page({
       })
       return false;
     }
-
     billInfo.tagId = this.data.activeTagId + ''
     billInfo.userId = this.data.userId;
-
     var util = require('../../utils/util.js')
     var recordTime = this.data.date;
     if (recordTime === '') { //当显示为今天时
       recordTime = util.formatDate(new Date());
     }
-
     let date = new Date();
     let s = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     billInfo.recordTime = recordTime + " " + s;

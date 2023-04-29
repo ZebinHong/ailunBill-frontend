@@ -1,5 +1,10 @@
-import {getDayBillList,getStatInMonth} from "../../service/billApi"
-import {getTagList} from '../../service/tagApi.js'
+import {
+  getDayBillList,
+  getStatInMonth
+} from "../../service/billApi"
+import {
+  getTagList
+} from '../../service/tagApi.js'
 const app = getApp()
 
 Page({
@@ -14,7 +19,8 @@ Page({
     pageSize: 10,
     date: '',
     tabbar: {},
-    tags: []
+    tags: [],
+    isBottom: false
   },
   onLoad() {
     console.log("index page load ...");
@@ -22,18 +28,22 @@ Page({
     var userId = wx.getStorageSync('userId');
     var d = new Date();
     var date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    this.setData({date});
+    this.setData({
+      date
+    });
     getTagList(userId).then(res => {
-      if (res.data.code == 200){
+      if (res.data.code == 200) {
         // console.log(res)
-        this.setData({tags: res.data.data});
+        this.setData({
+          tags: res.data.data
+        });
       }
     })
   },
   onShow() {
     // 若没有登录,返回false
     var userId = wx.getStorageSync('userId');
-    if (userId == '' || userId == undefined){
+    if (userId == '' || userId == undefined) {
       this.setData({
         dayincome: 0,
         dayoutcome: 0,
@@ -41,7 +51,6 @@ Page({
         monthoutcome: 0,
       })
     }
-    console.log("index page show ..." + userId);
     if (this.data.date == '') {
       var date = new Date();
       this.setData({
@@ -53,10 +62,18 @@ Page({
     })
     getDayBillList(userId, this.data.pageNum, this.data.pageSize, this.data.date, 8).then(res => {
       if (res.data.code === 200) {
-        console.log(res)
         var bills = res.data.data.records;
         var dayincome = 0,
           dayoutcome = 0;
+        if (bills.length < this.data.pageSize || (bills.length == this.data.pageSize && res.data.data.current == res.data.data.pages)) {
+          this.setData({
+            isBottom: true
+          });
+        } else {
+          this.setData({
+            isBottom: false
+          });
+        }
         for (let idx1 in bills) {
           if (bills[idx1].type == 0) {
             dayincome += bills[idx1].money;
@@ -66,22 +83,32 @@ Page({
           for (let idx2 in this.data.tags) {
             if (bills[idx1].tagId === this.data.tags[idx2].id) {
               bills[idx1].iconClass = this.data.tags[idx2].iconClass;
+              break;
             }
           }
+          bills[idx1].showTime = bills[idx1].recordTime.substring(5, bills[idx1].recordTime.length - 3);
         }
         this.setData({
           bills: bills,
           dayincome: dayincome,
           dayoutcome: dayoutcome
-        })
+        });
       } else {
-        this.setData({
-          bills: null
-        })
+        wx.showToast({
+          title: res.data.msg || res.data.message,
+          icon: 'error',
+          duration: 1000
+        });
       }
-    })
+    }).catch(error => {
+      wx.showToast({
+        title: error.errMsg,
+        icon: 'error',
+        duration: 1000
+      });
+    });
     var date = new Date();
-    getStatInMonth(date.getFullYear() + "-" + (date.getMonth() + 1),userId, 0).then(res => {
+    getStatInMonth(date.getFullYear() + "-" + (date.getMonth() + 1), userId, 0).then(res => {
       if (res.data.code == 200) {
         var monthincome = 0;
         var bills = res.data.data;
@@ -92,8 +119,8 @@ Page({
           monthincome: monthincome.toFixed(2)
         })
       }
-    })
-    getStatInMonth(date.getFullYear() + "-" + (date.getMonth() + 1),userId, 1).then(res => {
+    });
+    getStatInMonth(date.getFullYear() + "-" + (date.getMonth() + 1), userId, 1).then(res => {
       if (res.data.code == 200) {
         var monthoutcome = 0;
         var bills = res.data.data;
@@ -104,18 +131,26 @@ Page({
           monthoutcome: monthoutcome.toFixed(2)
         })
       }
-    })
+    });
   },
   onReachBottom() {
-    console.log(this.data.pageNum)
     var userId = wx.getStorageSync('userId');
     getDayBillList(userId, this.data.pageNum + 1, this.data.pageSize, this.data.date, 8)
       .then(res => {
-        if (res.data.code === 200 && res.data.data.records.length > 0) {
+        if (res.data.code === 200) {
           this.setData({
             pageNum: this.data.pageNum + 1
           })
           var bills = res.data.data.records;
+          if (bills.length < this.data.pageSize || (bills.length == this.data.pageSize && res.data.data.current == res.data.data.pages)) {
+            this.setData({
+              isBottom: true
+            });
+          } else {
+            this.setData({
+              isBottom: false
+            });
+          }
           for (let idx1 in bills) {
             for (let idx2 in this.data.tags) {
               if (bills[idx1].tagId === this.data.tags[idx2].id) {
@@ -126,8 +161,9 @@ Page({
           var total = [];
           total = this.data.bills.concat(bills);
           this.setData({
-            bills: total
-          })
+            bills: total,
+            pageNum: this.data.pageNum + 1
+          });
         }
         wx.hideNavigationBarLoading()
       })
@@ -140,5 +176,9 @@ Page({
           duration: 2000
         })
       })
+  },
+  onPullDownRefresh() {
+    this.onShow();
+    wx.stopPullDownRefresh();
   }
 })

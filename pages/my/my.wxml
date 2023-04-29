@@ -38,14 +38,14 @@
           <image src="../../image/my/tongji.png"></image>
           <view class="text">账单统计</view>
         </navigator>
-        <!-- <navigator class="orders_item border_line" url="/pages/tag/tag" open-type="navigate">
+        <navigator class="orders_item border_line" url="/pages/tag/tag" open-type="navigate">
           <image src="../../image/my/dingdan.png"></image>
           <view class="text">标签管理</view>
-        </navigator> -->
-        <view class="orders_item border_line" bindtap="noDevTap">
+        </navigator>
+        <!-- <view class="orders_item border_line" bindtap="noDevTap">
           <image src="../../image/my/dingdan.png"></image>
           <view class="text">标签管理</view>
-        </view>
+        </view> -->
       </view>
       <view class="orders_wrap">
         <navigator class="orders_item border_line" url="/pages/feedback/feedback">

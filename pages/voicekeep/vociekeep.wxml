@@ -60,7 +60,7 @@
             </view>
           </view>
           <view class="page-section">
-            <view class="weui-cells__title">分类</view>
+            <view class="weui-cells__title">分类<navigator style="float:right;color: cornflowerblue;margin-right: 30rpx;" url="../tag/tag">编辑标签</navigator></view>
             <view class="weui-cells weui-cells_after-title">
               <block class="tap" wx:for="{{tags}}" wx:for-item="item" wx:for-index="idx">
                 <view class="tap-item {{item.id == activeTagId?'active':''}}" catchtap="onTagTap" data-id="{{item.id}}">

@@ -153,6 +153,7 @@ Page({
       y = [];
     if (res.data.code == 200) {
       var tmp = res.data.data;
+      console.log(JSON.stringify(tmp));
       for (let i = 0; i < tmp.length; i++) {
         x.push((tmp[i].year + "年" + tmp[i].month + "月"))
         y.push(tmp[i].total)
@@ -222,7 +223,7 @@ Page({
     this.onShow();
   },
   outcomeTap() {
-    if (this.data.type === 0) {
+    if (this.data.type === 0 || this.data.type === 2) {
       this.setData({
         type: 1
       })
@@ -230,9 +231,17 @@ Page({
     }
   },
   incomeTap() {
-    if (this.data.type === 1) {
+    if (this.data.type === 1 || this.data.type === 2) {
       this.setData({
         type: 0
+      })
+      this.onShow();
+    }
+  },
+  subTap(){
+    if (this.data.type === 0 || this.data.type === 1) {
+      this.setData({
+        type: 2
       })
       this.onShow();
     }

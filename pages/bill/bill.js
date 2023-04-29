@@ -7,7 +7,6 @@ import {
 
 var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -21,7 +20,9 @@ Page({
     tagId: 8,
     tagName: '全部',
     tagClass: 'iconfont icon-quanbu',
-    tags: []
+    tags: [],
+    isBottom: true,
+    bills: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,15 +35,28 @@ Page({
     getBillList(userId, pageNum, pageSize, date, tagId).then(res => {
         if (res.data.code === 200) {
           var bills = res.data.data.records;
+          if (bills.length < pageSize || (bills.length == pageSize && res.data.data.current == res.data.data.pages)) {
+            this.setData({
+              isBottom: true
+            });
+          } else {
+            this.setData({
+              isBottom: false
+            });
+          }
           for (let idx1 in bills) {
             for (let idx2 in this.data.tags) {
               if (bills[idx1].tagId === this.data.tags[idx2].id) {
                 bills[idx1].iconClass = this.data.tags[idx2].iconClass;
+                break;
               }
             }
+            bills[idx1].showTime = bills[idx1].recordTime.substring(5, bills[idx1].recordTime.length - 3);
           }
+          var total = this.data.bills.concat(bills);
           this.setData({
-            bills: bills
+            bills: total,
+            pageNum: this.data.pageNum + 1
           })
         } else {
           this.setData({
@@ -52,7 +66,6 @@ Page({
         wx.hideNavigationBarLoading()
       })
       .catch(err => {
-        console.log("获取bills失败", err)
         wx.hideNavigationBarLoading()
         wx.showToast({
           title: '获取数据失败',
@@ -62,16 +75,13 @@ Page({
       })
   },
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
     var userId = wx.getStorageSync('userId');
-    console.log("my page show ..." + userId);
+    if (userId == '' || userId == undefined || userId == null) {
+      userId = 1;
+    }
     getTagList(userId).then(res => {
       if (res.data.code == 200) {
         this.setData({
@@ -90,52 +100,41 @@ Page({
     this.setData({
       pageNum: 1
     })
-    this.getBillPage(userId, this.data.pageNum, this.data.pageSize, inputDate, this.data.tagId);
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function (options) {},
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
     wx.showNavigationBarLoading();
-    var inputDate = this.data.year + "-" + this.data.month;
-    //mybatis-plus的页面计算：limit (currentPage - 1)*pageSize, pageSize, currentPage从1开始
-    var userId = wx.getStorageSync('userId');
-    getBillList(userId, this.data.pageNum + 1, this.data.pageSize, inputDate, this.data.tagId)
-      .then(res => {
-        if (res.data.code === 200 && res.data.data.records.length > 0) {
-          this.setData({
-            pageNum: this.data.pageNum + 1
-          })
+    getBillList(userId, this.data.pageNum, this.data.pageSize, inputDate, this.data.tagId).then(res => {
+        if (res.data.code === 200) {
           var bills = res.data.data.records;
+          if (bills.length < this.data.pageSize || (bills.length == this.data.pageSize && res.data.data.current == res.data.data.pages)) {
+            this.setData({
+              isBottom: true
+            });
+          } else {
+            this.setData({
+              isBottom: false
+            });
+          }
           for (let idx1 in bills) {
             for (let idx2 in this.data.tags) {
               if (bills[idx1].tagId === this.data.tags[idx2].id) {
                 bills[idx1].iconClass = this.data.tags[idx2].iconClass;
+                break;
               }
             }
+            bills[idx1].showTime = bills[idx1].recordTime.substring(5, bills[idx1].recordTime.length - 3);
           }
-          var total = [];
-          total = this.data.bills.concat(bills);
+          console.log(bills);
           this.setData({
-            bills: total
+            bills: bills,
+            pageNum: this.data.pageNum + 1
+          })
+        } else {
+          this.setData({
+            bills: null
           })
         }
         wx.hideNavigationBarLoading()
       })
       .catch(err => {
-        console.log("获取bills失败", err)
         wx.hideNavigationBarLoading()
         wx.showToast({
           title: '获取数据失败',
@@ -143,6 +142,25 @@ Page({
           duration: 2000
         })
       })
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function (options) {
+    this.onShow();
+    wx.stopPullDownRefresh();
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    console.log(this.data.isBottom);
+    wx.showNavigationBarLoading();
+    var inputDate = this.data.year + "-" + this.data.month;
+    //mybatis-plus的页面计算：limit (currentPage - 1)*pageSize, pageSize, currentPage从1开始
+    console.log(inputDate);
+    var userId = wx.getStorageSync('userId');
+    this.getBillPage(userId, this.data.pageNum, this.data.pageSize, inputDate, this.data.tagId);
   },
   /**
    * 用户点击右上角分享
@@ -158,7 +176,8 @@ Page({
     })
     var tagId = this.data.tagId == 8 ? null : this.data.tagId; //8是全部（标签）的id
     this.setData({
-      pageNum: 1 //当前页面置1
+      pageNum: 1, //当前页面置1,
+      bills: []
     })
     var userId = wx.getStorageSync('userId');
     this.getBillPage(userId, this.data.pageNum, this.data.pageSize, date, tagId);
@@ -200,7 +219,8 @@ Page({
     var inputDate = this.data.year + "-" + this.data.month;
     var inputTagId = tagId == 8 ? null : tagId; //8是全部（标签）的id
     this.setData({
-      pageNum: 1 //当前页面置1
+      pageNum: 1, //当前页面置1
+      bills: []
     })
     var userId = wx.getStorageSync('userId');
     this.getBillPage(userId, this.data.pageNum, this.data.pageSize, inputDate, inputTagId);

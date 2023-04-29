@@ -28,7 +28,11 @@
         </view>
         <view class="down-item" catchtap="onExcelTap">
           <image src="../image/keep/excel.png" mode=""/>
-          <text>Excel文件</text>
+          <text>微信Excel</text>
+        </view>
+        <view class="down-item" catchtap="onAlipayExcelTap">
+          <image src="../image/keep/excel.png" mode=""/>
+          <text>支付宝Excel</text>
         </view>
     </view>
   </view>
